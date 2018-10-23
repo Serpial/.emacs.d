@@ -17,7 +17,7 @@
 ;;;;;;;;;;;;;;
 
 ;; Set home directory
-(cd "L:\\") ;; Windows Only
+;; (cd "L:\\") ;; Windows Only
 
 ;; Installs melpa and use-package
 (require 'package)
