@@ -66,6 +66,9 @@
 ;; Changes the way the editor looks
 (tool-bar-mode -1)
 
+;; Change the default font size
+(set-face-attribute 'default nil :height 110)
+
 ;; Add full word wrap
 (global-visual-line-mode t)
 
