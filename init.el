@@ -4,7 +4,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (auto-complete use-package))))
+ '(package-selected-packages (quote (markdown-mode auto-complete use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -71,6 +71,12 @@
 
 ;; Add full word wrap
 (global-visual-line-mode t)
+
+;; Changing command keys
+;;     Changing other window to C-#
+(global-set-key (kbd "C-#") 'other-window)
+(global-unset-key (kbd "C-x o"))
+
 
 ;; make emacs semi-transparent
 (set-frame-parameter (selected-frame) 'alpha '(92 . 95))
