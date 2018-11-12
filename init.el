@@ -76,6 +76,12 @@
 ;;     Changing other window to C-#
 (global-set-key (kbd "C-#") 'other-window)
 (global-unset-key (kbd "C-x o"))
+;;     Start of buffer
+(global-set-key (kbd "M-,") 'beginning-of-buffer)
+(global-unset-key (kbd "M-<"))
+;;     End of buffer
+(global-set-key (kbd "M-.") 'end-of-buffer)
+(global-unset-key (kbd "M->"))
 
 
 ;; make emacs semi-transparent
