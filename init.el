@@ -64,10 +64,13 @@
 (setq auto-save-default nil)
 
 ;; Changes the way the editor looks
-(tool-bar-mode -1)
+(tool-bar-mode -1) ;; minimal
+(custom-set-variables
+ '(initial-frame-alist (quote ((fullscreen . maximized)))))
+
 
 ;; Change the default font size
-(set-face-attribute 'default nil :height 110)
+(set-face-attribute 'default nil :height 80)
 
 ;; Add full word wrap
 (global-visual-line-mode t)
