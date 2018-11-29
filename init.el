@@ -34,28 +34,13 @@
   (package-install 'use-package))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Add good auto-completion
-(use-package auto-complete
-  :ensure t
-  :init
-  (progn
-    (ac-config-default)
-    (global-auto-complete-mode t)
-    ))
-
-(use-package monokai-theme
-	:ensure t
-	:init
-	)
-(load-theme 'monokai t)
-
 ;; Helm stuff
 (use-package helm
   :ensure t
   :bind (("M-a" . helm-M-x)
          ("C-x C-f" . helm-find-files)
          ("C-x f" . helm-recentf)
-         ("C-SPC" . helm-dabbrev)
+         ("C-M-SPC" . helm-dabbrev)
          ("M-y" . helm-show-kill-ring)
          ("C-x b" . helm-buffers-list))
   :bind (:map helm-map
@@ -90,7 +75,22 @@
   :bind ("M-p" . helm-projectile-ag)
   :commands (helm-ag helm-projectile-ag)
   :init (setq helm-ag-insert-at-point 'symbol
-helm-ag-command-option "--path-to-ignore ~/.agignore"))
+              helm-ag-command-option "--path-to-ignore ~/.agignore"))
+
+;; Add good auto-completion
+(use-package auto-complete
+  :ensure t
+  :init
+  (progn
+    (ac-config-default)
+    (global-auto-complete-mode t)
+    ))
+
+(use-package monokai-theme
+	:ensure t
+	:init
+	)
+(load-theme 'monokai t)
 
 ;; Stops the startup screen from showing
 (setq inhibit-startup-screen t)
@@ -113,8 +113,6 @@ helm-ag-command-option "--path-to-ignore ~/.agignore"))
 ;; Changes the way the editor looks
 (tool-bar-mode -1) ;; minimal
 
-
-
 ;; Change the default font size
 (set-face-attribute 'default nil :height 80)
 
@@ -131,8 +129,6 @@ helm-ag-command-option "--path-to-ignore ~/.agignore"))
 ;;     End of buffer
 (global-set-key (kbd "M-.") 'end-of-buffer)
 (global-unset-key (kbd "M->"))
-;;     Change what set mark is
-(global-set-key (kbd "C-M-SPC") 'set-mark-command)
 
 ;; make emacs semi-transparent
 (set-frame-parameter (selected-frame) 'alpha '(92 . 95))
