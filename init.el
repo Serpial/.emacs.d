@@ -134,9 +134,11 @@
 (set-frame-parameter (selected-frame) 'alpha '(92 . 95))
 (add-to-list 'default-frame-alist '(alpha . (92 . 95)))
 
-
 ;; Install Extra modes
 ;;     D-mode
 (use-package d-mode
   :ensure t
   :mode ("\\.d$" . d-mode))
+
+;; change the caret type
+(setq-default cursor-type 'hbar)
