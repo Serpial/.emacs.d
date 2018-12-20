@@ -141,4 +141,6 @@
   :mode ("\\.d$" . d-mode))
 
 ;; change the caret type
-(setq-default cursor-type 'hbar)
+(setq-default cursor-type 'bar)
+(blink-cursor-mode 0)
+(setq-default cursor-in-non-selected-windows nil)
