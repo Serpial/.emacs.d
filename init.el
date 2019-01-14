@@ -19,6 +19,8 @@
 ;; My Changes
 ;;;;;;;;;;;;;;
 
+;; Use M-x eval-buffer to refresh emacs
+
 ;; Set home directory
 ;; (cd "L:\\") ;; Windows Only
 
@@ -114,7 +116,7 @@
 (tool-bar-mode -1) ;; minimal
 
 ;; Change the default font size
-(set-face-attribute 'default nil :height 80)
+(set-face-attribute 'default nil :height 110)
 
 ;; Add full word wrap
 (global-visual-line-mode t)
