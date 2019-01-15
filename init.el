@@ -94,6 +94,14 @@
 	)
 (load-theme 'monokai t)
 
+;; Function for reopening the file in sudo mode
+(defun er-sudo-edit (&optional arg)
+  (interactive "P")
+  (if (or arg (not buffer-file-name))
+      (find-file (concat "/sudo:root@localhost:"
+                         (ido-read-file-name "Find file(as root): ")))
+      (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
 ;; Stops the startup screen from showing
 (setq inhibit-startup-screen t)
 
@@ -121,7 +129,7 @@
 ;; Add full word wrap
 (global-visual-line-mode t)
 
-;; Changing command keys
+;; Changing command keys 
 ;;     Changing other window to C-#
 (global-set-key (kbd "C-#") 'other-window)
 ;; (global-unset-key (kbd "C-x o"))
@@ -131,6 +139,8 @@
 ;;     End of buffer
 (global-set-key (kbd "M-.") 'end-of-buffer)
 (global-unset-key (kbd "M->"))
+;;     Adding a key for opening a file in sudo
+(global-set-key (kbd "C-x C-g") #'er-sudo-edit)
 
 ;; make emacs semi-transparent
 (set-frame-parameter (selected-frame) 'alpha '(92 . 95))
