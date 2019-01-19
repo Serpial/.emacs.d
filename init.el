@@ -7,7 +7,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (helm-ag helm-swoop helm-descbinds helm d-mode T markdown-mode auto-complete use-package))))
+    (go-mode haskell-mode helm-ag helm-swoop helm-descbinds helm d-mode T markdown-mode auto-complete use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -140,7 +140,7 @@
 (global-set-key (kbd "M-.") 'end-of-buffer)
 (global-unset-key (kbd "M->"))
 ;;     Adding a key for opening a file in sudo
-(global-set-key (kbd "C-x C-g") #'er-sudo-edit)
+(global-set-key (kbd "C-x g") #'er-sudo-edit)
 
 ;; make emacs semi-transparent
 (set-frame-parameter (selected-frame) 'alpha '(92 . 95))
@@ -151,6 +151,12 @@
 (use-package d-mode
   :ensure t
   :mode ("\\.d$" . d-mode))
+(use-package haskell-mode
+  :ensure t
+  :mode ("\\.hs$" . haskell-mode))
+(use-package go-mode
+  :ensure t
+  :mode ("\\.go$" . go-mode))
 
 ;; change the caret type
 (setq-default cursor-type 'bar)
