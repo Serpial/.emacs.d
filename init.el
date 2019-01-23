@@ -140,11 +140,11 @@
 (global-set-key (kbd "M-.") 'end-of-buffer)
 (global-unset-key (kbd "M->"))
 ;;     Adding a key for opening a file in sudo
-(global-set-key (kbd "C-x g") #'er-sudo-edit)
+(global-set-key (kbd "C-x C-'") #'er-sudo-edit)
 
 ;; make emacs semi-transparent
-(set-frame-parameter (selected-frame) 'alpha '(92 . 95))
-(add-to-list 'default-frame-alist '(alpha . (92 . 95)))
+(set-frame-parameter (selected-frame) 'alpha '(90 . 93))
+(add-to-list 'default-frame-alist '(alpha . (90 . 93)))
 
 ;; Install Extra modes
 ;;     D-mode
