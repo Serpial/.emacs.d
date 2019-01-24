@@ -1,6 +1,7 @@
 ac-comphist.dat
+tramp
+session.*
 
 auto-save-list/
 elpa/
 games/
-session.*
