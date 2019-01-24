@@ -36,6 +36,18 @@
   (package-install 'use-package))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; Install Extra modes
+;;     D-mode
+(use-package d-mode
+  :ensure t
+  :mode ("\\.d$" . d-mode))
+(use-package haskell-mode
+  :ensure t
+  :mode ("\\.hs$" . haskell-mode))
+(use-package go-mode
+  :ensure t
+  :mode ("\\.go$" . go-mode))
+
 ;; Helm stuff
 (use-package helm
   :ensure t
@@ -46,30 +58,30 @@
          ("M-y" . helm-show-kill-ring)
          ("C-x b" . helm-buffers-list))
   :bind (:map helm-map
-	      ("M-i" . helm-previous-line)
-	      ("M-k" . helm-next-line)
-	      ("M-I" . helm-previous-page)
-	      ("M-K" . helm-next-page)
-	      ("M-h" . helm-beginning-of-buffer)
-	      ("M-H" . helm-end-of-buffer))
+              ("M-i" . helm-previous-line)
+              ("M-k" . helm-next-line)
+              ("M-I" . helm-previous-page)
+              ("M-K" . helm-next-page)
+              ("M-h" . helm-beginning-of-buffer)
+              ("M-H" . helm-end-of-buffer))
   :config (progn
-	    (setq helm-buffers-fuzzy-matching t)
+            (setq helm-buffers-fuzzy-matching t)
             (helm-mode 1)))
 (use-package helm-descbinds
   :ensure t
   :bind ("C-h b" . helm-descbinds))
 (use-package helm-files
   :bind (:map helm-find-files-map
-	      ("M-i" . nil)
-	      ("M-k" . nil)
-	      ("M-I" . nil)
-	      ("M-K" . nil)
-	      ("M-h" . nil)
-	      ("M-H" . nil)))
+              ("M-i" . nil)
+              ("M-k" . nil)
+              ("M-I" . nil)
+              ("M-K" . nil)
+              ("M-h" . nil)
+              ("M-H" . nil)))
 (use-package helm-swoop
   :ensure t
   :bind (("M-m" . helm-swoop)
-	 ("M-M" . helm-swoop-back-to-last-point))
+         ("M-M" . helm-swoop-back-to-last-point))
   :init
   (bind-key "M-m" 'helm-swoop-from-isearch isearch-mode-map))
 (use-package helm-ag
@@ -89,9 +101,9 @@
     ))
 
 (use-package monokai-theme
-	:ensure t
-	:init
-	)
+        :ensure t
+        :init
+        )
 (load-theme 'monokai t)
 
 ;; Function for reopening the file in sudo mode
@@ -114,7 +126,8 @@
 (electric-pair-mode 1)
 
 ;; Turn tabs into spaces
-(setq-default indent-tabs-mode)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 
 ;; Stops back-ups and save files
 (setq make-backup-files nil)
@@ -145,18 +158,6 @@
 ;; make emacs semi-transparent
 (set-frame-parameter (selected-frame) 'alpha '(90 . 93))
 (add-to-list 'default-frame-alist '(alpha . (90 . 93)))
-
-;; Install Extra modes
-;;     D-mode
-(use-package d-mode
-  :ensure t
-  :mode ("\\.d$" . d-mode))
-(use-package haskell-mode
-  :ensure t
-  :mode ("\\.hs$" . haskell-mode))
-(use-package go-mode
-  :ensure t
-  :mode ("\\.go$" . go-mode))
 
 ;; change the caret type
 (setq-default cursor-type 'bar)
