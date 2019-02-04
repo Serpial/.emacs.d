@@ -111,8 +111,8 @@
 (global-set-key (kbd "C-x C-'") #'er-sudo-edit)
 
 ;; make emacs semi-transparent
-(set-frame-parameter (selected-frame) 'alpha '(90 . 93))
-(add-to-list 'default-frame-alist '(alpha . (90 . 93)))
+(set-frame-parameter (selected-frame) 'alpha '(99 . 99))
+(add-to-list 'default-frame-alist '(alpha . (99 . 99)))
 
 ;; change the caret type
 (setq-default cursor-type 'bar)
