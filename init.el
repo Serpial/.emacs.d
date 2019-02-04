@@ -55,11 +55,12 @@
     (global-auto-complete-mode t)
     ))
 
-(use-package klere-theme
-        :ensure t
-        :init
-        )
-(load-theme 'klere t)
+;; Themes
+(use-package abyss-theme
+  :ensure t
+  :init
+  )
+(load-theme 'abyss t)
 
 ;; Function for reopening the file in sudo mode
 (defun er-sudo-edit (&optional arg)
@@ -111,8 +112,8 @@
 (global-set-key (kbd "C-x C-'") #'er-sudo-edit)
 
 ;; make emacs semi-transparent
-(set-frame-parameter (selected-frame) 'alpha '(99 . 99))
-(add-to-list 'default-frame-alist '(alpha . (99 . 99)))
+(set-frame-parameter (selected-frame) 'alpha '(90 . 93))
+(add-to-list 'default-frame-alist '(alpha . (90 . 93)))
 
 ;; change the caret type
 (setq-default cursor-type 'bar)
