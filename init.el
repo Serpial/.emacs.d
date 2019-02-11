@@ -5,7 +5,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(initial-frame-alist (quote ((fullscreen . maximized))))
- '(package-selected-packages (quote (go-mode T markdown-mode auto-complete use-package))))
+ '(package-selected-packages
+   (quote
+    (haskell-mode d-mode kaolin-themes go-mode T markdown-mode auto-complete use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -56,11 +58,11 @@
     ))
 
 ;; Themes
-(use-package abyss-theme
+(use-package kaolin-themes
   :ensure t
   :init
   )
-(load-theme 'abyss t)
+(load-theme' kaolin-fusion t)
 
 ;; Function for reopening the file in sudo mode
 (defun er-sudo-edit (&optional arg)
