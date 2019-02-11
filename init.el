@@ -7,7 +7,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (haskell-mode d-mode go-mode T markdown-mode auto-complete use-package))))
+    (srcery-theme haskell-mode d-mode go-mode T markdown-mode auto-complete use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -58,11 +58,11 @@
     ))
 
 ;; Themes
-(use-package firecode-theme
+(use-package srcery-theme
   :ensure t
   :init
   )
-(load-theme' firecode t)
+(load-theme' srcery t)
 
 ;; Function for reopening the file in sudo mode
 (defun er-sudo-edit (&optional arg)
