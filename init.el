@@ -86,6 +86,7 @@
 ;; Turn tabs into spaces
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
+(setq-default c-basic-offset 4)
 
 ;; Stops back-ups and save files
 (setq make-backup-files nil)
