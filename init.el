@@ -94,6 +94,7 @@
 
 ;; Changes the way the editor looks
 (tool-bar-mode -1) ;; minimal
+(menu-bar-mode -1)
 
 ;; Change the default font size
 (set-face-attribute 'default nil :height 110)
