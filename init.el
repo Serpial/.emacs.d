@@ -92,6 +92,9 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
+;; Turn off the bell sound and give a visual bell instead
+(setq visible-bell 1)
+
 ;; Changes the way the editor looks
 (tool-bar-mode -1) ;; minimal
 (menu-bar-mode -1)
