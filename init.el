@@ -126,3 +126,10 @@
 (setq-default cursor-type 'bar)
 (blink-cursor-mode 0)
 (setq-default cursor-in-non-selected-windows nil)
+
+;; Org-mode
+(global-set-key (kbd "C-c l") 'org-store-link)
+;;    Nicer bullets
+(add-to-list 'load-path "~/.emacs.d/org-bullets/")
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
