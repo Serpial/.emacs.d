@@ -130,9 +130,9 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-log-done 'time)
-(setq org-ellipsis "⤵")
+(setq org-ellipsis "↴")
 ;;    Nicer bullets
 (add-to-list 'load-path "~/.emacs.d/org-bullets/")
 (use-package org-bullets
   :init
-  (add-hook 'org-mode-hook 'org-bullets-mode))
+  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
