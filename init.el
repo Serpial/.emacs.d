@@ -107,8 +107,7 @@
 
 ;; Changing command keys 
 ;;     Changing other window to C-#
-(global-set-key (kbd "C-#") 'other-window)
-;; (global-unset-key (kbd "C-x o"))
+;; (global-set-key (kbd "C-#") 'other-window)
 ;;     Start of buffer
 (global-set-key (kbd "M-,") 'beginning-of-buffer)
 (global-unset-key (kbd "M-<"))
@@ -129,7 +128,10 @@
 
 ;; Org-mode
 (global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(setq org-log-done 'time)
+(setq org-ellipsis "⤵")
 ;;    Nicer bullets
-(add-to-list 'load-path "~/.emacs.d/org-bullets/")
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(use-package org-bullets
+  :init
+  (add-hook 'org-mode-hook 'org-bullets-mode))
