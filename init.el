@@ -132,6 +132,7 @@
 (setq org-log-done 'time)
 (setq org-ellipsis "⤵")
 ;;    Nicer bullets
+(add-to-list 'load-path "~/.emacs.d/org-bullets/")
 (use-package org-bullets
   :init
   (add-hook 'org-mode-hook 'org-bullets-mode))
