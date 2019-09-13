@@ -142,5 +142,5 @@
   :init
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 ;;    Org babel
-(org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
