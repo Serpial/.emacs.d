@@ -29,6 +29,8 @@
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
              '("melpa-stable" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -127,6 +129,9 @@
 (setq-default cursor-in-non-selected-windows nil)
 
 ;; Org-mode
+(use-package org
+  :mode (("\\.org$" . org-mode))
+  :ensure org)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (setq org-log-done 'time)
@@ -136,3 +141,6 @@
 (use-package org-bullets
   :init
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+;;    Org babel
+(org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
