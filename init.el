@@ -134,8 +134,11 @@
   :ensure org)
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c o") (lambda() (interactive)(find-file org-default-notes-file)))
 (setq org-log-done 'time)
 (setq org-ellipsis "↴")
+(setq org-default-notes-file "~/org/todo.org")
 ;;    Nicer bullets
 (add-to-list 'load-path "~/.emacs.d/org-bullets/")
 (use-package org-bullets
@@ -144,3 +147,13 @@
 ;;    Org babel
 (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+;;    Org capture
+(setq org-export-coding-system 'utf-8)
+(setq org-capture-templates
+      '(("t" "Personal Todo" entry (file+headline org-default-notes-file
+                                                       "Personal")
+         "* TODO %?\n %i\n %a")
+        ("u" "University Todo" entry (file+headline org-default-notes-file
+                                                    "University")
+         "* TODO %?\n %i\n %a")
+        ))
