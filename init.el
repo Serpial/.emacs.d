@@ -135,10 +135,26 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
+(define-key org-mode-map (kbd "C-c C-x C-s") 'hrs/mark-done-and-archive)
 (global-set-key (kbd "C-c o") (lambda() (interactive)(find-file org-default-notes-file)))
 (setq org-log-done 'time)
 (setq org-ellipsis "↴")
-(setq org-default-notes-file "~/org/todo.org")
+(setq org-directory "~/org")
+
+(defun org-file-path (filename)
+  "Return the absolute address of an org file, given its relative name."
+  (concat (file-name-as-directory org-directory) filename))
+
+(setq org-default-notes-file (org-file-path "todo.org"))
+(setq org-archive-location
+      (concat (org-file-path "archive.org") "::* From %s"))
+
+(defun hrs/mark-done-and-archive ()
+  "Mark the state of an org-mode item as DONE and archive it."
+  (interactive)
+  (org-todo 'done)
+  (org-archive-subtree))
+
 ;;    Nicer bullets
 (add-to-list 'load-path "~/.emacs.d/org-bullets/")
 (use-package org-bullets
@@ -152,8 +168,8 @@
 (setq org-capture-templates
       '(("t" "Personal Todo" entry (file+headline org-default-notes-file
                                                        "Personal")
-         "* TODO %?\n %i\n %a")
+         "* TODO %?\nCREATED : %T %i\n %a")
         ("u" "University Todo" entry (file+headline org-default-notes-file
                                                     "University")
-         "* TODO %?\n %i\n %a")
+         "* TODO %?\nCREATED : %T %i\n %a")
         ))
