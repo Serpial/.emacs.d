@@ -7,7 +7,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (srcery-theme haskell-mode d-mode go-mode T markdown-mode auto-complete use-package))))
+    (diff-hl org-plus-contrib haskell-mode go-mode auto-complete use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -21,28 +21,33 @@
 
 ;; Use M-x eval-buffer to refresh emacs
 
-;; Set home directory
-;; (cd "L:\\") ;; Windows Only
-
 ;; Installs melpa and use-package
 (require 'package)
-(setq package-enable-at-startup nil)
-(add-to-list 'package-archives
-             '("melpa-stable" . "http://melpa.org/packages/") t)
-(add-to-list 'package-archives
-             '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 (package-initialize)
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+(setq package-enable-at-startup nil)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(when (not (package-installed-p 'use-package))
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+(use-package auto-compile
+  :config (auto-compile-on-load-mode))
+
+(setq load-prefer-newer t)
+
+;; Set me
+(setq user-full-name "Paul J. Hutchison"
+      user-mail-address "p@ulhutchison.co.uk")
+
+;; Org configurations
+(load-file "~/.emacs.d/org-config.el")
+
 ;; Install Extra modes
-;;     D-mode
-(use-package d-mode
-  :ensure t
-  :mode ("\\.d$" . d-mode))
 (use-package haskell-mode
   :ensure t
   :mode ("\\.hs$" . haskell-mode))
@@ -60,11 +65,11 @@
     ))
 
 ;; Themes
-(use-package srcery-theme
+(use-package lush-theme
   :ensure t
   :init
   )
-(load-theme' srcery t)
+(load-theme' lush t)
 
 ;; Function for reopening the file in sudo mode
 (defun er-sudo-edit (&optional arg)
@@ -128,48 +133,8 @@
 (blink-cursor-mode 0)
 (setq-default cursor-in-non-selected-windows nil)
 
-;; Org-mode
-(use-package org
-  :mode (("\\.org$" . org-mode))
-  :ensure org)
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c c") 'org-capture)
-(define-key org-mode-map (kbd "C-c C-x C-s") 'hrs/mark-done-and-archive)
-(global-set-key (kbd "C-c o") (lambda() (interactive)(find-file org-default-notes-file)))
-(setq org-log-done 'time)
-(setq org-ellipsis "↴")
-(setq org-directory "~/org")
-
-(defun org-file-path (filename)
-  "Return the absolute address of an org file, given its relative name."
-  (concat (file-name-as-directory org-directory) filename))
-
-(setq org-default-notes-file (org-file-path "todo.org"))
-(setq org-archive-location
-      (concat (org-file-path "archive.org") "::* From %s"))
-
-(defun hrs/mark-done-and-archive ()
-  "Mark the state of an org-mode item as DONE and archive it."
-  (interactive)
-  (org-todo 'done)
-  (org-archive-subtree))
-
-;;    Nicer bullets
-(add-to-list 'load-path "~/.emacs.d/org-bullets/")
-(use-package org-bullets
-  :init
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-;;    Org babel
-(org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
-(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
-;;    Org capture
-(setq org-export-coding-system 'utf-8)
-(setq org-capture-templates
-      '(("t" "Personal Todo" entry (file+headline org-default-notes-file
-                                                       "Personal")
-         "* TODO %?\nCREATED : %T %i\n %a")
-        ("u" "University Todo" entry (file+headline org-default-notes-file
-                                                    "University")
-         "* TODO %?\nCREATED : %T %i\n %a")
-        ))
+;; Highlight uncommitted changed
+(use-package diff-hl
+  :config
+  (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
+  (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
