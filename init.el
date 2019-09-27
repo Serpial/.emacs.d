@@ -39,6 +39,7 @@
   :config (auto-compile-on-load-mode))
 
 (setq load-prefer-newer t)
+(setq package-check-signature nil)
 
 ;; Set me
 (setq user-full-name "Paul J. Hutchison"
@@ -65,11 +66,11 @@
     ))
 
 ;; Themes
-(use-package lush-theme
+(use-package darkokai-theme
   :ensure t
   :init
   )
-(load-theme' lush t)
+(load-theme' darkokai t)
 
 ;; Function for reopening the file in sudo mode
 (defun er-sudo-edit (&optional arg)
