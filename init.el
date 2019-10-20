@@ -7,7 +7,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (diff-hl org-plus-contrib haskell-mode go-mode auto-complete use-package))))
+    (php-mode openwith diff-hl org-plus-contrib haskell-mode go-mode auto-complete use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -55,6 +55,9 @@
 (use-package go-mode
   :ensure t
   :mode ("\\.go$" . go-mode))
+(use-package php-mode
+  :ensure t
+  :mode ("\\.php$" . php-mode))
 
 ;; Add good auto-completion
 (use-package auto-complete
@@ -140,3 +143,10 @@
   (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
   (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
 (global-diff-hl-mode)
+
+;; Open pdfs with evince instead
+(use-package openwith
+  :custom
+  (openwith-associations '(("\\.pdf\\'" "evince" (file))))
+  :config
+  (openwith-mode t))
