@@ -7,7 +7,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (php-mode openwith diff-hl org-plus-contrib haskell-mode go-mode auto-complete use-package))))
+    (neotree dired-sidebar php-mode openwith diff-hl org-plus-contrib haskell-mode go-mode auto-complete use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -117,8 +117,7 @@
 (global-visual-line-mode t)
 
 ;; Changing command keys 
-;;     Changing other window to C-#
-;; (global-set-key (kbd "C-#") 'other-window)
+(global-set-key (kbd "C-x r") 'revert-buffer)
 ;;     Start of buffer
 (global-set-key (kbd "M-,") 'beginning-of-buffer)
 (global-unset-key (kbd "M-<"))
@@ -150,3 +149,19 @@
   (openwith-associations '(("\\.pdf\\'" "evince" (file))))
   :config
   (openwith-mode t))
+
+(use-package neotree
+  :ensure t
+  :bind (("<f2>" . neotree-toggle))
+  :defer
+  :init
+  (bind-key "C-# c" 'neotree-create-node)
+  (bind-key "C-# r" 'neotree-rename-node)
+  (bind-key "C-# d" 'neotree-delete-node)
+  (bind-key "C-# j" 'neotree-next-node)
+  (bind-key "C-# k" 'neotree-previous-node)
+  (bind-key "C-# g" 'neotree-refresh)
+  (bind-key "C-# C" 'neotree-change-root)
+  (bind-key "C-# h" 'neotree-hidden-file-toggle)
+  (bind-key "C-# q" 'neotree-hide)
+  (bind-key "C-# l" 'neotree-enter))
