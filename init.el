@@ -89,7 +89,7 @@
 ;; add line numbers at side of screen
 (global-linum-mode t)
 ;;     disable linum mode when in shell
-(add-hook 'shell-mode-hook (lambda () (linum-mode -1))) 
+(add-hook 'shell-mode-hook (lambda () (linum-mode -1)))
 
 ;; Automatically close braces and stuff
 (electric-pair-mode 1)
@@ -116,7 +116,7 @@
 ;; Add full word wrap
 (global-visual-line-mode t)
 
-;; Changing command keys 
+;; Changing command keys
 (global-set-key (kbd "C-x r") 'revert-buffer)
 ;;     Start of buffer
 (global-set-key (kbd "M-,") 'beginning-of-buffer)
@@ -126,10 +126,9 @@
 (global-unset-key (kbd "M->"))
 ;;     Adding a key for opening a file in sudo
 (global-set-key (kbd "C-x C-'") #'er-sudo-edit)
-
-;; make emacs semi-transparent
-(set-frame-parameter (selected-frame) 'alpha '(90 . 93))
-(add-to-list 'default-frame-alist '(alpha . (90 . 93)))
+;; More convenient commands to change frame size
+(global-set-key (kbd "C-(") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-)") 'shrink-window-horizontally)
 
 ;; change the caret type
 (setq-default cursor-type 'bar)
@@ -165,3 +164,10 @@
   (bind-key "C-# h" 'neotree-hidden-file-toggle)
   (bind-key "C-# q" 'neotree-hide)
   (bind-key "C-# l" 'neotree-enter))
+
+;; flycheck
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode)
+  :diminish flycheck-mode)
+
