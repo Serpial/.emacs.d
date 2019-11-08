@@ -1,4 +1,7 @@
-;; Automatic Stuff
+;;; package -- summary
+;;; Commentary:
+;; My Emacs config that includes extra packages for org mode and stuff
+;;; Code:
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -151,6 +154,8 @@
   :config
   (openwith-mode t))
 
+(use-package all-the-icons)
+
 (use-package neotree
   :ensure t
   :bind (("<f2>" . neotree-toggle))
@@ -167,9 +172,12 @@
   (bind-key "C-# q" 'neotree-hide)
   (bind-key "C-# l" 'neotree-enter))
 
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
 ;; flycheck
 (use-package flycheck
   :ensure t
   :init (global-flycheck-mode)
   :diminish flycheck-mode)
-
+(provide 'init)
+;;; init.el ends here
