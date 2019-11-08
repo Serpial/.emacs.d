@@ -127,8 +127,10 @@
 ;;     Adding a key for opening a file in sudo
 (global-set-key (kbd "C-x C-'") #'er-sudo-edit)
 ;; More convenient commands to change frame size
-(global-set-key (kbd "C-(") 'enlarge-window-horizontally)
-(global-set-key (kbd "C-)") 'shrink-window-horizontally)
+(global-set-key (kbd "C-(") 'shrink-window-horizontally)
+(global-set-key (kbd "C-)") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-_") 'shrink-window)
+(global-set-key (kbd "C-+") 'enlarge-window)
 
 ;; change the caret type
 (setq-default cursor-type 'bar)
