@@ -10,7 +10,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (neotree dired-sidebar php-mode openwith diff-hl org-plus-contrib haskell-mode go-mode auto-complete use-package))))
+    (flycheck all-the-icons neotree dired-sidebar php-mode openwith diff-hl org-plus-contrib haskell-mode go-mode auto-complete use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -134,6 +134,8 @@
 (global-set-key (kbd "C-)") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-_") 'shrink-window)
 (global-set-key (kbd "C-+") 'enlarge-window)
+;; Use capital O to go back a frame
+(global-set-key (kbd "C-x O") 'previous-multiframe-window)
 
 ;; change the caret type
 (setq-default cursor-type 'bar)
@@ -176,8 +178,10 @@
 
 ;; flycheck
 (use-package flycheck
-  :ensure t
+  :defer 2
+  :diminish
   :init (global-flycheck-mode)
-  :diminish flycheck-mode)
+  :custom
+  (flycheck-display-errors-delay .3))
 (provide 'init)
 ;;; init.el ends here
