@@ -10,7 +10,7 @@
  '(initial-frame-alist (quote ((fullscreen . maximized))))
  '(package-selected-packages
    (quote
-    (flycheck all-the-icons neotree dired-sidebar php-mode openwith diff-hl org-plus-contrib haskell-mode go-mode auto-complete use-package))))
+    (flycheck all-the-icons neotree dired-sidebar php-mode openwith diff-hl org-plus-contrib go-mode auto-complete use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -52,9 +52,6 @@
 (load-file "~/.emacs.d/org-config.el")
 
 ;; Install Extra modes
-(use-package haskell-mode
-  :ensure t
-  :mode ("\\.hs$" . haskell-mode))
 (use-package go-mode
   :ensure t
   :mode ("\\.go$" . go-mode))
@@ -157,6 +154,7 @@
   (openwith-mode t))
 
 (use-package all-the-icons)
+;; M-x all-the-icons-install-fonts
 
 (use-package neotree
   :ensure t
