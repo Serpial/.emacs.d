@@ -51,6 +51,9 @@
 ;; Org configurations
 (load-file "~/.emacs.d/org-config.el")
 
+;; Set default directory
+(setq default-directory "~/")
+
 ;; Install Extra modes
 (use-package go-mode
   :ensure t
@@ -77,6 +80,7 @@
 
 ;; Function for reopening the file in sudo mode
 (defun er-sudo-edit (&optional arg)
+  "Takes ARG that is associated with the file in which we call the function."
   (interactive "P")
   (if (or arg (not buffer-file-name))
       (find-file (concat "/sudo:root@localhost:"
