@@ -2,6 +2,7 @@ ac-comphist.dat
 tramp
 session.*
 bookmarks
+network-security.data
 
 auto-save-list/
 elpa/
