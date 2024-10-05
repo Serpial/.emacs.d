@@ -91,7 +91,7 @@
 (setq inhibit-startup-screen t)
 
 ;; add line numbers at side of screen
-(global-linum-mode t)
+(global-display-line-numbers-mode t)
 ;;     disable linum mode when in shell
 (add-hook 'shell-mode-hook (lambda () (linum-mode -1)))
 
