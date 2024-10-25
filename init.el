@@ -37,7 +37,7 @@
   (package-install 'use-package))
 
 (require 'use-package-ensure)
-(setq use-package-always-ensure t)
+(setq use-package-always-engsure t)
 (use-package auto-compile
   :config (auto-compile-on-load-mode))
 
@@ -55,12 +55,9 @@
 (setq default-directory "~/")
 
 ;; Install Extra modes
-(use-package go-mode
-  :ensure t
-  :mode ("\\.go$" . go-mode))
-(use-package php-mode
-  :ensure t
-  :mode ("\\.php$" . php-mode))
+;;(use-package go-mode
+;;  :ensure t
+;;  :mode ("\\.go$" . go-mode))
 
 ;; Add good auto-completion
 (use-package auto-complete
@@ -139,7 +136,7 @@
 (global-set-key (kbd "C-x O") 'previous-multiframe-window)
 
 ;; change the caret type
-(setq-default cursor-type 'bar)
+(setq-default cursor-type '(box . size))
 (blink-cursor-mode 0)
 (setq-default cursor-in-non-selected-windows nil)
 

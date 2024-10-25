@@ -30,17 +30,11 @@
 ;; Org Based Variables
 (setq org-log-done 'time)
 (setq org-ellipsis "↴")
-(setq org-directory "~/org")
+(setq org-directory "C:/org")
 (setq org-default-notes-file (org-file-path "todo.org"))
 (setq org-archive-location
       (concat (org-file-path "archive.org") "::* From %s"))
-
-;; Nicer bullets
-(add-to-list 'load-path "~/.emacs.d/org-bullets/")
-(use-package org-bullets
-  :init
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-
+2
 ;; Org babel
 (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
@@ -53,8 +47,8 @@
       '(("t" "Personal Todo" entry (file+headline org-default-notes-file
                                                        "Personal")
          "* TODO %?\nCREATED : %T %i\n %a")
-        ("u" "University Todo" entry (file+headline org-default-notes-file
-                                                    "University")
+        ("u" "Work Todo" entry (file+headline org-default-notes-file
+                                                    "Work")
          "* TODO %?\nCREATED : %T %i\n %a")
         ))
 ;;; org-config.el ends here
