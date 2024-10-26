@@ -50,7 +50,8 @@
       user-mail-address "p@ulhutchison.co.uk")
 
 ;; Set default directory
-(setq default-directory "~/")
+;; (setq default-directory "~/")
+(setq default-directory "C:/")
 
 ;; Minimalistic modeline
 (use-package diminish
