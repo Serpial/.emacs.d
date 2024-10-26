@@ -7,10 +7,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(initial-frame-alist (quote ((fullscreen . maximized))))
+ '(initial-frame-alist '((fullscreen . maximized)))
  '(package-selected-packages
-   (quote
-    (flycheck all-the-icons neotree dired-sidebar php-mode openwith diff-hl org-plus-contrib go-mode auto-complete use-package))))
+   '(flycheck neotree all-the-icons diff-hl auto-le dired-sidebar openwith org-plus-contrib use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -37,9 +36,11 @@
   (package-install 'use-package))
 
 (require 'use-package-ensure)
-(setq use-package-always-engsure t)
+(setq use-package-always-ensure t)
 (use-package auto-compile
-  :config (auto-compile-on-load-mode))
+  :ensure t
+  :config
+  (auto-compile-on-load-mode))
 
 (setq load-prefer-newer t)
 (setq package-check-signature nil)
@@ -48,11 +49,12 @@
 (setq user-full-name "Paul J. Hutchison"
       user-mail-address "p@ulhutchison.co.uk")
 
-;; Org configurations
-(load-file "~/.emacs.d/org-config.el")
-
 ;; Set default directory
 (setq default-directory "~/")
+
+;; Minimalistic modeline
+(use-package diminish
+  :ensure t)
 
 ;; Install Extra modes
 ;;(use-package go-mode
@@ -71,9 +73,8 @@
 ;; Themes
 (use-package darkokai-theme
   :ensure t
-  :init
-  )
-(load-theme' darkokai t)
+  :init)
+(load-theme 'darkokai t)
 
 ;; Function for reopening the file in sudo mode
 (defun er-sudo-edit (&optional arg)
@@ -89,8 +90,12 @@
 
 ;; add line numbers at side of screen
 (global-display-line-numbers-mode t)
-;;     disable linum mode when in shell
-(add-hook 'shell-mode-hook (lambda () (linum-mode -1)))
+;;     disable line numbers when in shell
+(dolist (hook '(shell-mode-hook
+                eshell-mode-hook
+                term-mode-hook
+                comint-mode-hook))  ; comint-mode is a parent mode for interactive shells
+  (add-hook hook (lambda () (display-line-numbers-mode -1))))
 
 ;; Automatically close braces and stuff
 (electric-pair-mode 1)
@@ -128,8 +133,8 @@
 ;;     Adding a key for opening a file in sudo
 (global-set-key (kbd "C-x C-'") #'er-sudo-edit)
 ;; More convenient commands to change frame size
-(global-set-key (kbd "C-(") 'shrink-window-horizontally)
-(global-set-key (kbd "C-)") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-{") 'shrink-window-horizontally)
+(global-set-key (kbd "C-}") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-_") 'shrink-window)
 (global-set-key (kbd "C-+") 'enlarge-window)
 ;; Use capital O to go back a frame
@@ -142,10 +147,9 @@
 
 ;; Highlight uncommitted changed
 (use-package diff-hl
+  :hook ((prog-mode vc-dir-mode) . diff-hl-mode)
   :config
-  (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
-  (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
-(global-diff-hl-mode)
+  (global-diff-hl-mode 1))
 
 ;; Open pdfs with evince instead
 (use-package openwith
@@ -154,7 +158,8 @@
   :config
   (openwith-mode t))
 
-(use-package all-the-icons)
+(use-package all-the-icons
+  :ensure t)
 ;; M-x all-the-icons-install-fonts
 
 (use-package neotree
@@ -165,22 +170,71 @@
   (bind-key "C-# c" 'neotree-create-node)
   (bind-key "C-# r" 'neotree-rename-node)
   (bind-key "C-# d" 'neotree-delete-node)
-  (bind-key "C-# j" 'neotree-next-node)
-  (bind-key "C-# k" 'neotree-previous-node)
   (bind-key "C-# g" 'neotree-refresh)
   (bind-key "C-# C" 'neotree-change-root)
   (bind-key "C-# h" 'neotree-hidden-file-toggle)
-  (bind-key "C-# q" 'neotree-hide)
   (bind-key "C-# l" 'neotree-enter))
 
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 ;; flycheck
 (use-package flycheck
+  :ensure t
   :defer 2
   :diminish
   :init (global-flycheck-mode)
   :custom
-  (flycheck-display-errors-delay .3))
+  (flycheck-display-errors-delay 0.3))
 (provide 'init)
+
+;; Install org and apply key binding for refiling
+;;; Code:
+(use-package org
+  :mode (("\\.org$" . org-mode))
+  :ensure org-plus-contrib
+  :bind-keymap ("C-c C-x C-s" . mark-done-and-archive))
+
+;; Useful Functions
+(defun org-file-path (filename)
+  "Return the absolute address of an org file, given its FILENAME."
+  (concat (file-name-as-directory org-directory) filename))
+
+(defun mark-done-and-archive ()
+  "Mark the state of an 'org-mode' item as DONE and archive it."
+  (interactive)
+  (org-todo 'done)
+  (org-archive-subtree))
+
+;; Setting key bindings
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c o") (lambda() (interactive)(find-file org-default-notes-file)))
+
+;; Key binding for archiving TODOs
+;; (define-key org-mode-map (kbd "C-c C-x C-s") 'mark-done-and-archive)
+
+;; Org Based Variables
+(setq org-log-done 'time)
+(setq org-ellipsis "↴")
+(setq org-directory "C:/org")
+(setq org-default-notes-file (org-file-path "todo.org"))
+(setq org-archive-location
+      (concat (org-file-path "archive.org") "::* From %s"))
+
+;; Org babel
+(org-babel-do-load-languages 'org-babel-load-languages '((shell . t) (python . t)))
+
+;; Org capture
+(defvar org-export-coding-system)
+(setq org-export-coding-system 'utf-8)
+(defvar org-capture-templates)
+(setq org-capture-templates
+      '(("t" "Personal Todo" entry (file+headline org-default-notes-file
+                                                       "Personal")
+         "* TODO %?\nCREATED : %T %i\n %a")
+        ("u" "Work Todo" entry (file+headline org-default-notes-file
+                                                    "Work")
+         "* TODO %?\nCREATED : %T %i\n %a")
+        ))
 ;;; init.el ends here
