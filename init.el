@@ -209,7 +209,7 @@
 ;; Org Based Variables
 (setq org-log-done 'time)
 (setq org-ellipsis "↴")
-(setq org-directory "C:/org")
+(setq org-directory "C:/org-notes")
 (setq org-default-notes-file (org-file-path "todo.org"))
 (setq org-archive-location
       (concat (org-file-path "archive.org") "::* From %s"))
