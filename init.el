@@ -7,7 +7,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-;; '(initial-frame-alist '((fullscreen . maximized)))
  '(package-selected-packages
    '(flycheck neotree all-the-icons diff-hl auto-le dired-sidebar openwith org-contrib use-package)))
 (custom-set-faces
@@ -166,14 +165,7 @@
   :ensure t
   :bind (("<f2>" . neotree-toggle))
   :defer
-  :init
-  (bind-key "C-# c" 'neotree-create-node)
-  (bind-key "C-# r" 'neotree-rename-node)
-  (bind-key "C-# d" 'neotree-delete-node)
-  (bind-key "C-# g" 'neotree-refresh)
-  (bind-key "C-# C" 'neotree-change-root)
-  (bind-key "C-# h" 'neotree-hidden-file-toggle)
-  (bind-key "C-# l" 'neotree-enter))
+  :init)
 
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
