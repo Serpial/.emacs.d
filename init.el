@@ -183,19 +183,12 @@
 ;;; Code:
 (use-package org
   :mode (("\\.org$" . org-mode))
-  :ensure org-contrib
-  :bind-keymap ("C-c C-x C-s" . mark-done-and-archive))
+  :ensure org-contrib)
 
 ;; Useful Functions
 (defun org-file-path (filename)
   "Return the absolute address of an org file, given its FILENAME."
   (concat (file-name-as-directory org-directory) filename))
-
-(defun mark-done-and-archive ()
-  "Mark the state of an 'org-mode' item as DONE and archive it."
-  (interactive)
-  (org-todo 'done)
-  (org-archive-subtree))
 
 ;; Setting key bindings
 (global-set-key (kbd "C-c l") 'org-store-link)
@@ -203,8 +196,14 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c o") (lambda() (interactive)(find-file org-default-notes-file)))
 
+(defun mark-done-and-archive ()
+  "Mark the state of an 'org-mode' item as DONE and archive it."
+  (interactive)
+  (org-todo 'done)
+  (org-archive-subtree))
+
 ;; Key binding for archiving TODOs
-;; (define-key org-mode-map (kbd "C-c C-x C-s") 'mark-done-and-archive)
+(define-key org-mode-map (kbd "C-c C-x C-s") 'mark-done-and-archive)
 
 ;; Org Based Variables
 (setq org-log-done 'time)
