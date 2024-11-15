@@ -220,9 +220,9 @@
 (setq org-capture-templates
       '(("t" "Personal Todo" entry (file+headline org-default-notes-file
                                                        "Personal")
-         "* TODO %?\nCREATED : %T %i\n %a")
+         "* TODO %?\nCREATED: %T %i\n %a")
         ("u" "Work Todo" entry (file+headline org-default-notes-file
                                                     "Work")
-         "* TODO %?\nCREATED : %T %i\n %a")
+         "* TODO %?\nCREATED: %T %i\n %a")
         ))
 ;;; init.el ends here
