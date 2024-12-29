@@ -70,10 +70,10 @@
     ))
 
 ;; Themes
-(use-package darkokai-theme
+(use-package alect-themes
   :ensure t
   :init)
-(load-theme 'darkokai t)
+(load-theme 'alect-dark t)
 
 ;; Function for reopening the file in sudo mode
 (defun er-sudo-edit (&optional arg)
