@@ -24,8 +24,15 @@
 
 ;; Installs melpa and use-package
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(setq package-archives
+      '(("melpa" . "https://melpa.org/packages/")
+        ("gnu" . "https://elpa.gnu.org/packages/")
+        ("nongnu"       . "https://elpa.nongnu.org/nongnu/")))
+
 (package-initialize)
+
+(unless package-archive-contents
+  (package-refresh-contents))
 (setq package-enable-at-startup nil)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -180,7 +187,6 @@
 (provide 'init)
 
 ;; Install org and apply key binding for refiling
-;;; Code:
 (use-package org
   :mode (("\\.org$" . org-mode))
   :ensure org-contrib
