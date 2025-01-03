@@ -27,7 +27,7 @@
 (setq package-archives
       '(("melpa" . "https://melpa.org/packages/")
         ("gnu" . "https://elpa.gnu.org/packages/")
-        ("nongnu"       . "https://elpa.nongnu.org/nongnu/")))
+        ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 
 (package-initialize)
 
@@ -196,6 +196,10 @@
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
   (global-set-key (kbd "C-c o") (lambda() (interactive)(find-file org-default-notes-file))))
+
+(use-package org-superstar
+  :ensure t
+  :hook (org-mode . org-superstar-mode))
 
 ;; Useful Functions
 (defun org-file-path (filename)
