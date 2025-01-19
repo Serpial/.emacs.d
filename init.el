@@ -120,7 +120,7 @@
 
 ;; Changes the way the editor looks
 (tool-bar-mode -1) ;; minimal
-(menu-bar-mode -1)
+;; (menu-bar-mode -1) ;; disable File/Edit menu
 
 ;; Change the default font size
 (set-face-attribute 'default nil :height 110)
